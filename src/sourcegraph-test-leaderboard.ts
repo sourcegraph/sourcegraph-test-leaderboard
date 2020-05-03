@@ -9,7 +9,7 @@ export function activate(ctx: sourcegraph.ExtensionContext): void {
     const subscription = new Subscription()
     ctx.subscriptions.add(subscription)
 
-    subscription.add(
+    /* subscription.add(
         combineLatest([
             from(sourcegraph.configuration).pipe(
                 map(() => sourcegraph.configuration.get<{ experimentalFeatures?: { codeInsights?: boolean } }>().value),
@@ -29,7 +29,7 @@ export function activate(ctx: sourcegraph.ExtensionContext): void {
                 )
             )
             .subscribe()
-    )
+    ) */
 
     subscription.add(
         sourcegraph.app.registerViewProvider('testLeaderboard', {
