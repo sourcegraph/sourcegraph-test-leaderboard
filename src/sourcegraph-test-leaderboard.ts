@@ -1,5 +1,5 @@
 import * as sourcegraph from 'sourcegraph'
-import { Subscription, from, combineLatest, Observable, throwError, of, NEVER } from 'rxjs'
+import { Subscription, from, combineLatest, Observable, throwError, of } from 'rxjs'
 import { map, tap, filter, switchMap } from 'rxjs/operators'
 
 // TODO(sqs): un-hardcode date
@@ -39,7 +39,7 @@ export function activate(ctx: sourcegraph.ExtensionContext): void {
 
                 // Only use this on sourcegraph/* repos for now.
                 if (!repo.includes('github.com/sourcegraph/')) {
-                    return NEVER
+                    return null
                 }
 
                 return getData(repo, rev, path).pipe(
