@@ -1,6 +1,6 @@
 import * as sourcegraph from 'sourcegraph'
 import { Subscription, from, combineLatest, Observable, throwError, of } from 'rxjs'
-import { map, tap, filter, switchMap } from 'rxjs/operators'
+import { map, switchMap } from 'rxjs/operators'
 
 // TODO(sqs): un-hardcode date
 const SINCE = '2020-04-20'
