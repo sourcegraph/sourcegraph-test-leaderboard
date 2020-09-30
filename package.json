@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/sourcegraph/sourcegraph/master/shared/src/schema/extension.schema.json",
+  "$schema": "https://raw.githubusercontent.com/sourcegraph/sourcegraph/main/shared/src/schema/extension.schema.json",
   "name": "sourcegraph-test-leaderboard",
   "icon": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>",
   "description": "Who writes the most tests? (In each repository and subdirectory.)",
@@ -8,7 +8,9 @@
     "*"
   ],
   "wip": true,
-  "categories": [],
+  "categories": [
+    "Reports and stats"
+  ],
   "tags": [],
   "contributes": {
     "actions": [],
