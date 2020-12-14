@@ -37,11 +37,6 @@ export function activate(ctx: sourcegraph.ExtensionContext): void {
             provideView: ctx => {
                 const { repo, rev, path } = resolveDocumentURI(ctx.viewer.directory.uri.toString())
 
-                // Only use this on sourcegraph/* repos for now.
-                if (!repo.includes('github.com/sourcegraph/')) {
-                    return null
-                }
-
                 return getData(repo, rev, path).pipe(
                     map(data => ({
                         title: 'Test leaderboard',
