@@ -1,6 +1,5 @@
 import * as sourcegraph from 'sourcegraph'
-import { Subscription, from, combineLatest, Observable, throwError, of } from 'rxjs'
-import { map, switchMap } from 'rxjs/operators'
+import { Subscription, from, combineLatest, Observable, throwError, of, map, switchMap } from 'rxjs'
 
 // TODO(sqs): un-hardcode date
 const SINCE = '2020-04-20'
@@ -78,10 +77,10 @@ const queryGraphQL = (query: string, variables: Record<string, unknown>): Observ
     from(sourcegraph.commands.executeCommand<GQL.IGraphQLResponseRoot>('queryGraphQL', query, variables)).pipe(
         switchMap(({ data, errors }) => {
             if (errors && errors.length > 0) {
-                return throwError(new Error(`GraphQL error: ${JSON.stringify(errors)}`))
+                return throwError(() => new Error(`GraphQL error: ${JSON.stringify(errors)}`))
             }
             if (!data) {
-                return throwError(new Error('GraphQL error: no data'))
+                return throwError(() => new Error('GraphQL error: no data'))
             }
             return of(data as GQL.IQuery)
         })
@@ -123,7 +122,7 @@ function getData(repo: string, rev: string, dir: string): Observable<Data> {
                 oid: String(oid),
             }))
         ),
-        switchMap(oids => (oids === undefined ? throwError(new Error('no repository or commit found')) : of(oids)))
+        switchMap(oids => (oids === undefined ? throwError(() => new Error('no repository or commit found')) : of(oids)))
     )
 
     interface RelevantCommit extends CandidateCommit {
